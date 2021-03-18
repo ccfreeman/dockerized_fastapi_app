@@ -1,74 +1,22 @@
-# Dynamic Route Optimizer API
-
-## Introduction
-
-This API acts a proxy to the scala code for the dynamic route 
-optimizer. It validates the payload, store the request payload
-on Azure Blob, and queues the request payload on Azure EventBus.
-
-Open API Spec: http://localhost:8000/docs
-
-### Sequence Diagram 
-
-![alt text](dataflow.png)
-
-### Request Body
-
-```json
-{
-  "data" : [{
-    "ups": false,
-    "drivers": [{
-        "initial_depot": "",
-        "final_depot": "",
-        "final_depot_open": true,
-        "reefer": true,
-        "team": true,
-        "capacity": 1234,
-        "changed_clock": true,
-        "used_duty_time": 1,
-        "used_driving_time": 1,
-        "available_time": "2021-01-27T00013:00:00z",
-        "available_city": "",
-        "available_state": "",
-        "last_load_served_load_id":"",
-        "last_load_served_stop_type":"P|D"
-      }],
-      "primary_optimization": true,
-      "reopt_same_day": true,
-      "reoptimization": true,
-      "excluded_load_ids": [
-        1234
-      ],
-      "exclude_island_loads": true,
-      "carrier_code": "",
-      "fuel_cost": 1234.56,
-      "miles_band": [{
-            "id":0,
-            "miles_band": 1999,
-            "cpm_v_single_driver": 2.2,
-            "cpm_r_single_driver": 2.2,
-            "cpm_v_team_driver": 2.2,
-            "cpm_r_team_driver": 2.2
-        }],
-        "maximum_dead_head": 300,
-        "maximum_dead_head_between_loads": 300,
-        "start_day_of_week": "Monday",
-        "end_day_of_week": "Monday"
-    }]
-}
+ Docker commands to run application:
+ ```
+ >> docker build -t flask-app .
+ >> docker run -d -p 5000:5000 flask-app
 ```
+The first command builds the image of your project. This will be used to build the container itself with the proper environment. The second command launches your (detached) container from the image you've just built, and maps port 5000 on your local machine to port 5000 in the container's directory.
 
-## How to run this project locally
-
-### Starting the service locally
-
-```shell
-$ docker-compose up -d --build app
+Get the name of your container:
+ ```
+ >> docker ps
+...CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS         PORTS                    NAMES
+...3f1b1e2f1f20   flask-app   "/bin/sh -c ./entry-…"   10 seconds ago   Up 8 seconds   0.0.0.0:5000->5000/tcp   upbeat_beaver
 ```
-
-### Stopping the service locally
-
-```shell
-$ docker-compose down --remove-orphans
+** Note that the name of your image and your container are different. 
+Stop running your container:
+```
+>>> docker stop [container_name]
+```
+To completely clean your containers and images from the directory:
+```
+>>> docker system prune -a
 ```
