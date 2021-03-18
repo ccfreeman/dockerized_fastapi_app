@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+.git
+helm_chart
+Pipfile*
+request_scheduler.json
+Makefile
