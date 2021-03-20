@@ -1,4 +1,5 @@
 #!/bin/sh
 
+uvicorn main:app
 # gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
-python main.py
+# python main.py

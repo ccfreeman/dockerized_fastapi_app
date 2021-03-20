@@ -20,4 +20,5 @@ RUN pip install -r requirements.txt
 RUN chmod 755 entry-point.sh
 
 USER app_user
-CMD ./entry-point.sh
+CMD ["uvicorn", "main:app"]
+# CMD ./entry-point.sh
