@@ -1,17 +1,11 @@
 FROM tiangolo/uvicorn-gunicorn:python3.8
 
-RUN mkdir -p /engines
+ADD requirements.txt /app
 
-ADD app.py /
-ADD engines/*.py /engines/
+COPY ./app /app/app
 
-COPY requirements.txt .
-COPY entry-point.sh .
-
-WORKDIR /
 RUN pip install -r requirements.txt
 
-RUN chmod +x entry-point.sh
+EXPOSE 8080
 
-USER app_user
-CMD ./entry-point.sh
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
