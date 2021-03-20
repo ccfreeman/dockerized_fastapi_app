@@ -140,6 +140,5 @@ dmypy.json
 cython_debug/
 
 .idea
-requirements.txt
 .env
 .vscode/
